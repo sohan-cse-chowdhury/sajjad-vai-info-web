@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sajjad.com</title>
+  <meta name="description" content="Personal website showcasing social links, daily activities, and everything about me." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+ <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="chatbot.css">
+</head>
+<body class="bg-gradient-to-b from-[#060912] via-[#0a0f1e] to-[#0b1224] text-white antialiased">
+  <!-- Navigation -->
+  <header id="siteHeader" class="fixed top-0 left-0 right-0 z-40 transition-all">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center justify-between py-5">
+        <a href="#home" class="group inline-flex items-center gap-3">
+          <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-500 shadow-lg shadow-indigo-900/30 grid place-items-center">
+            <span class="font-black"><img src="profile_n.jpg"></span>
+          </div>
+          <div class="leading-tight">
+            <div class="font-bold tracking-tight">SAJJAD CHOWDHURY</div>
+            <div class="text-xs opacity-70">Developer • Sakib chowdhury sohan</div>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#about" class="opacity-80 hover:opacity-100">About</a>
+          <a href="#socials" class="opacity-80 hover:opacity-100">Social media</a>
+          <a href="#daily" class="opacity-80 hover:opacity-100">Daily</a>
+          <a href="#projects" class="opacity-80 hover:opacity-100">Memories</a>
+          <a href="#contact" class="opacity-80 hover:opacity-100">Contact</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button id="downloadResume" class="shine relative overflow-hidden bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-500 text-white px-4 py-2 rounded-xl font-semibold shadow-lg shadow-blue-900/30 hover:shadow-blue-900/40 transition-all"        onclick="window.open('CV for job.pdf')">
+            Download My Resume
+          </button>
+          <button id="menuBtn" class="md:hidden glass px-3 py-2 rounded-lg">Menu</button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden">
+      <div class="max-w-7xl mx-auto px-6 pb-4">
+        <div class="glass rounded-xl p-4 grid gap-2">
+          <a href="#about" class="opacity-90 hover:opacity-100 py-1">About</a>
+          <a href="#socials" class="opacity-90 hover:opacity-100 py-1">Social media</a>
+          <a href="#daily" class="opacity-90 hover:opacity-100 py-1">Daily</a>
+          <a href="#projects" class="opacity-90 hover:opacity-100 py-1">Memories</a>
+          <a href="#contact" class="opacity-90 hover:opacity-100 py-1">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero with Solar System -->
+  <section id="home" class="relative h-screen w-full overflow-hidden">
+    <!-- Canvas background -->
+    <canvas id="universe" class="absolute inset-0 w-full h-full"></canvas>
+    <!-- Subtle star overlay -->
+    <div class="twinkle absolute inset-0 opacity-40 pointer-events-none"></div>
+    <!-- Gradient vignette -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(8,10,25,0)_0%,rgba(8,10,25,0.2)_55%,rgba(8,10,25,0.8)_100%)] pointer-events-none"></div>
+
+
+
+    
+    
+    
+    <!-- Content -->
+    <div class="relative z-10 h-full  -mt-100">
+      <div class="max-w-7xl mx-auto h-full px-6 flex flex-col justify-center">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1.10 rounded-full glass mb-1">
+            <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-sm opacity-90">ONLINE</span>
+          
+          </div>
+          <br><br>
+          <h1 class="float text-4xl sm:text-5xl md:text-5xl font-black tracking-tight leading-[1.1]">
+  I live with the desire to <br> conquet the world.
+        </h1>
+<br><br><br><br><br><br>
+          <p class="mt-5 text-white/80 text-lg md:text-xl leading-relaxed">
+            I'm <span class="font-semibold">SAJJAD CHOWDHURY</span>, <br> a professional developer.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#socials" class="shine relative overflow-hidden bg-white/10 hover:bg-white/20 px-5 py-3 rounded-xl font-semibold">
+              View Social
+            </a>
+            <a href="#about" class="shine relative overflow-hidden bg-gradient-to-r from-fuchsia-500 to-pink-500 px-5 py-3 rounded-xl font-semibold shadow-lg shadow-pink-900/30 hover:shadow-pink-900/40">
+              Learn About Me
+            </a>
+          </div>
+
+
+
+
+
+
+
+
+
+          <!-- chatbot -->
+           <section>
+  <!-- Floating button -->
+
+  <button id="chatButton">   <img src="profile_n.jpg" alt="">     </button>
+
+
+  
+  <!-- Chatbox -->
+  <div id="chatbox">
+    <div id="chatHeader">SajjadAi</div>
+    <div id="messages"></div>
+    <div id="inputArea">
+      <input type="text" id="userInput" placeholder="Type a message...">
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatButton = document.getElementById("chatButton");
+    const chatbox = document.getElementById("chatbox");
+    const sendBtn = document.getElementById("sendBtn");
+    const userInput = document.getElementById("userInput");
+    const messages = document.getElementById("messages");
+
+    // Toggle chatbox
+    chatButton.addEventListener("click", () => {
+      chatbox.style.display = chatbox.style.display === "flex" ? "none" : "flex";
+    });
+
+    // Send message
+    sendBtn.addEventListener("click", sendMessage);
+    userInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      addMessage("You: " + message, "user");
+
+      let reply = "";
+      if (message.toLowerCase() === "hi" || message.toLowerCase() === "hello") {
+        reply = "Hello I,m Sajjad!👋 How can I help you today?";
+      } else if (message.toLowerCase().includes("how are you")) {
+        reply = "I'm doing great, What about you? ";
+      } else if (message.toLowerCase().includes("sohan")) {
+        reply = "Ooooh SOHAN.... He is my smart brother. He is fine. Do you like to talk about SOHAN? Then call me later!";
+      } else if (message.toLowerCase().includes("birth")) {
+        reply = "12th November 1995!";
+      } else if (message.toLowerCase().includes("from")) {
+        reply = "I'm from Daudkandi, Cumilla, Bangladesh!";
+      } else if (message.toLowerCase().includes("father name")) {
+        reply = "My name's name is Mohammad Ali Chowdhury";
+      } else if (message.toLowerCase().includes("where")) {
+        reply = "I'm in Singapure City";
+      } else if (message.toLowerCase().includes("child")) {
+        reply = "I have two baby girls. There names are Tabassum Chowdhury and Tashfia chowdhury";
+      } else if (message.toLowerCase().includes("brother")) {
+        reply = "I have just one Brother. He is MR. Sohan Chowdhury";
+      } else if (message.toLowerCase().includes("bye")) {
+        reply = "Goodbye! 👋 Have a nice day!";
+      } else {
+        reply = "Hmm 🤔 Please call me later ,We can talk about this ";
+      }
+
+      addMessage("Sajjad: - " + reply, "bot");
+      userInput.value = "";
+    }
+
+    function addMessage(text, sender) {
+      const div = document.createElement("div");
+      div.className = sender;
+      div.textContent = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+
+         </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Planet tooltip -->
+    <div id="planetTooltip" class="tooltip hidden">Planet</div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="relative py-24">
+    <div class="absolute inset-0 bg-[radial-gradient(800px_400px_at_10%_10%,rgba(79,70,229,0.12),transparent)] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="glass rounded-2xl p-8">
+          <div class="flex items-center gap-5">
+            <div class="">
+              <img src="profile_n.jpg " alt="">
+            </div>
+            <div>
+              <h2 class="l md:text-4xl font-extrabold tracking-tight"> Me,</h2>
+              <p class="text-white/70 mt-1">A quick snapshot</p>
+            </div>
+          </div>
+          <p class="text-white/80 mt-6 leading-relaxed">
+            I love turning complex ideas into simple, elegant products. My work sits at the intersection of
+            aesthetics and performance—clean and thoughtful.
+          </p>
+          <div class="mt-6 grid sm:grid-cols-3 gap-4">
+            <div class="glass rounded-xl p-4">
+              <div class="text-sm opacity-70">Location</div>
+              <div class="font-semibold">Daudkandi, Cumilla, Bangladesh</div>
+            </div>
+            <div class="glass rounded-xl p-4">
+              <div class="text-sm opacity-70">Role</div>
+              <div class="font-semibold">Fullstak Developer</div>
+            </div>
+            <div class="glass rounded-xl p-4">
+              <div class="text-sm opacity-70">Focus</div>
+              <div class="font-semibold">UI/UX, Web, Motion and try ML, AI</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="grid gap-6">
+          <div class="glass rounded-2xl p-6">
+            <h3 class="font-bold text-xl">My thinking</h3>
+            <p class="text-white/80 mt-2 leading-relaxed">
+             The world’s IT sector is like a living organism—constantly evolving, adapting, and innovating. As a developer, I see it as an endless playground of ideas, where technology bridges people, cultures, and possibilities. Every line of code we write today is part of the global digital foundation for tomorrow.
+            </p>
+            <ul class="mt-4 grid gap-2 text-white/80">
+              <li>• Never give up, and</li>
+              <li>• Never give up</li>
+            </ul>
+          </div>
+          <div class="glass rounded-2xl p-6">
+            <h3 class="font-bold text-xl">Highlights</h3>
+            <ul class="mt-3 grid gap-3 text-white/80">
+              <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-emerald-400"></span> Shipped 20+ web experiences</li>
+              <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-indigo-400"></span> 5 years building delightful UIs</li>
+              <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-pink-400"></span> Mentor and design system advocate</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Socials -->
+  <section id="socials" class="relative py-24">
+    <div class="absolute inset-0 bg-[radial-gradient(700px_400px_at_80%_20%,rgba(236,72,153,0.10),transparent)] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-10">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Social Media</h2>
+        <p class="text-white/70 mt-2">Connect with me across the web</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Twitter -->
+        <a target="_blank" href="https://x.com/mdsajjadchowdh5?s=21" class="shine relative overflow-hidden glass rounded-2xl p-6 hover:bg-white/15 group">
+          <div class="flex items-center justify-between">
+            <div class="text-lg font-semibold">Twitter / X</div>
+            <div class="opacity-60 group-hover:opacity-100 transition">↗</div>
+          </div>
+          <div class="mt-3 text-white/70">@MdSajjadchowdh5</div>
+        </a>
+        <!-- Facebook -->
+        <a target="_blank" href="https://www.facebook.com/share/167ZfdKQss/?mibextid=LQQJ4d" class="shine relative overflow-hidden glass rounded-2xl p-6 hover:bg-white/15 group">
+          <div class="flex items-center justify-between">
+            <div class="text-lg font-semibold">Facebook</div>
+            <div class="opacity-60 group-hover:opacity-100 transition">↗</div>
+          </div>
+          <div class="mt-3 text-white/70">Sajjad Chowdhury</div>
+        </a>
+        <!-- Whatsapp -->
+        <a target="_blank" href="https://wa.me/+6593598743" class="shine relative overflow-hidden glass rounded-2xl p-6 hover:bg-white/15 group">
+          <div class="flex items-center justify-between">
+            <div class="text-lg font-semibold">Whatsapp</div>
+            <div class="opacity-60 group-hover:opacity-100 transition">↗</div>
+          </div>
+          <div class="mt-3 text-white/70">~Chowdhury Sajjad</div>
+        </a>
+        <!-- Instagram -->
+        <a target="_blank" href="https://www.instagram.com/_sajjad.chowdhury_?igsh=c2xkN2l4cnE1dXF3" class="shine relative overflow-hidden glass rounded-2xl p-6 hover:bg-white/15 group">
+          <div class="flex items-center justify-between">
+            <div class="text-lg font-semibold">Instagram</div>
+            <div class="opacity-60 group-hover:opacity-100 transition">↗</div>
+          </div>
+          <div class="mt-3 text-white/70">_sajjad.chowdhury_</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Daily Activities -->
+  <section id="daily" class="relative py-24">
+    <div class="absolute inset-0 bg-[radial-gradient(700px_400px_at_20%_80%,rgba(34,197,94,0.10),transparent)] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-10 flex items-end justify-between gap-6">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">My Daily Activities</h2>
+          <p class="text-white/70 mt-2">A simple snapshot of my day</p>
+        </div>
+        <div class="glass rounded-xl p-1 flex">
+          <button id="weekdayBtn" class="px-3 py-1.5 rounded-lg font-medium bg-white/20">Weekday</button>
+          <button id="weekendBtn" class="px-3 py-1.5 rounded-lg font-medium opacity-80 hover:opacity-100">Weekend</button>
+        </div>
+      </div>
+
+      <div id="timeline" class="grid gap-4">
+        <!-- Timeline entries are injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- memory -->
+  <section id="projects" class="relative py-24">
+    <div class="absolute inset-0 bg-[radial-gradient(900px_500px_at_50%_0%,rgba(99,102,241,0.10),transparent)] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-10">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">My Memories</h2>
+        <p class="text-white/70 mt-2">Some pictures</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="shine relative overflow-hidden glass rounded-2xl p-6">
+          <div class="h-36 rounded-xl bg-gradient-to-br from-indigo-600/50 to-blue-600/30 border border-white/10">
+            <img src="534297893_1098996555034461_4259903949761405858_n.jpg" style= "width:100% ; height: 100%;">
+        </div>
+          <div class="mt-4 font-semibold">Eid al-Fitr (2019) 🌙</div>
+          <p class="text-white/70 mt-1">With My <b>Father</b> </p>
+          <a href="#" class="inline-block mt-3 text-sm opacity-90 hover:opacity-100"> →</a>
+        </div>
+
+        <div class="shine relative overflow-hidden glass rounded-2xl p-6">
+          <div class="h-36 rounded-xl bg-gradient-to-br from-rose-600/50 to-fuchsia-600/30 border border-white/10">
+           <img src="531392484_1050153243770367_6774749332846663312_n.jpg" style = "height: 100%; width: 100%;">
+          </div>
+
+
+          <div class="mt-4 font-semibold">In Airport ✈︎</div>
+          <p class="text-white/70 mt-1">With My <b>Mother</b>, My Smart <b>Brother</b> and <b>Childs</b> </p>
+          <a href="#" class="inline-block mt-3 text-sm opacity-90 hover:opacity-100">→</a>
+        </div>
+
+
+        <div class="shine relative overflow-hidden glass rounded-2xl p-6">
+          <div class="h-36 rounded-xl bg-gradient-to-br from-emerald-600/50 to-teal-600/30 border border-white/10">
+            <img src="Untitled design.png" style = "height: 100%; width: 100%;">
+          </div>
+          <div class="mt-4 font-semibold">In Bangladesh</div>
+          <p class="text-white/70 mt-1">With My little princess <b>'Tabassum Chowdhury'</b></p>
+          <a href="#" class="inline-block mt-3 text-sm opacity-90 hover:opacity-100"> →</a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="relative py-24">
+    <div class="absolute inset-0 bg-[radial-gradient(700px_500px_at_80%_80%,rgba(56,189,248,0.12),transparent)] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="glass rounded-2xl p-8 md:p-10">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="md:col-span-2">
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Let's connect</h2>
+            <p class="text-white/80 mt-3">
+              Prefer email? Click the button to open your email app with a prefilled message.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a id="emailMe" href="sajjadchowdhury@gmail.com" class="shine relative overflow-hidden bg-gradient-to-r from-sky-500 to-cyan-500 px-5 py-3 rounded-xl font-semibold shadow-lg shadow-cyan-900/30 hover:shadow-cyan-900/40">
+                Email Me
+              </a>
+              <button id="copyEmail" class="shine relative overflow-hidden bg-white/10 hover:bg-white/20 px-5 py-3 rounded-xl font-semibold">
+                Copy Email
+              </button>
+            </div>
+            <p class="text-white/60 text-sm mt-3">No contact form here to keep things simple and private.</p>
+          </div>
+          <div class="glass rounded-xl p-6">
+            <div class="text-sm opacity-70">Currently based in</div>
+            <div class="font-semibold mt-1">Cumilla, Bangladesh</div>
+            <div class="mt-4 text-sm opacity-70">Time zone</div>
+            <div class="font-semibold mt-1" id="tz">—</div>
+            <div class="mt-6">
+              <div class="text-sm opacity-70 mb-1">Quick links</div>
+              <div class="flex flex-wrap gap-2">
+                <a href="#about" class="glass px-3 py-1.5 rounded-full text-sm">About</a>
+                <a href="#socials" class="glass px-3 py-1.5 rounded-full text-sm">Socials</a>
+                <a href="#daily" class="glass px-3 py-1.5 rounded-full text-sm">Daily</a>
+                <a href="#projects" class="glass px-3 py-1.5 rounded-full text-sm">Memories</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative py-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-white/60">
+        <div>© <span id="year"></span> Sakib Chowdhury Sohan. All rights reserved.</div>
+        <div class="flex items-center gap-4">
+          <a href="#home" class="opacity-80 hover:opacity-100">Back to top ↑</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+  <script>
+    // Header appearance on scroll + mobile menu
+    (function() {
+      const header = document.getElementById('siteHeader');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuBtn = document.getElementById('menuBtn');
+      const setHeader = () => {
+        const scrolled = window.scrollY > 10;
+        header.className = 'fixed top-0 left-0 right-0 z-40 transition-all ' + (scrolled ? 'backdrop-blur bg-[#060912]/60 border-b border-white/10' : '');
+      };
+      setHeader();
+      window.addEventListener('scroll', setHeader);
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    })();
+
+    // Year and timezone
+    document.getElementById('year').textContent = new Date().getFullYear();
+    try {
+      document.getElementById('tz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local Time';
+    } catch (e) {
+      document.getElementById('tz').textContent = 'Local Time';
+    }
+
+    
+
+    // Copy email button
+    document.getElementById('copyEmail').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('sajjadchowdhury@gmail.com');
+        const btn = document.getElementById('copyEmail');
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(()=> btn.textContent = original, 1200);
+      } catch (e) {
+        alert('Email: sajjadchowdhury@gmail.com');
+      }
+    });
+
+    // Daily timeline data and UI
+    const weekday = [
+      { time: '06:30', title: 'Morning Run', note: '3–5 km to clear the mind' },
+      { time: '08:00', title: 'Deep Work', note: 'Design + code focus block' },
+      { time: '12:30', title: 'Lunch & Reading', note: 'Non-fiction or tech blogs' },
+      { time: '14:00', title: 'Collaboration', note: 'Reviews, feedback, pairing' },
+      { time: '18:30', title: 'Gym / Stretch', note: 'Mobility and strength' },
+      { time: '21:00', title: 'Personal Project', note: 'Exploration and play' },
+    ];
+    const weekend = [
+      { time: '08:30', title: 'Brunch', note: 'Slow morning, coffee time' },
+      { time: '10:00', title: 'Photography Walk', note: 'Capture textures and light' },
+      { time: '13:30', title: 'Friends & Family', note: 'Catch-ups and good food' },
+      { time: '17:00', title: 'Learning Hour', note: 'Courses or tinkering' },
+      { time: '20:30', title: 'Movie Night', note: 'Story and visuals' },
+    ];
+    const timelineEl = document.getElementById('timeline');
+    const weekdayBtn = document.getElementById('weekdayBtn');
+    const weekendBtn = document.getElementById('weekendBtn');
+
+    function renderTimeline(data) {
+      timelineEl.innerHTML = '';
+      data.forEach((item, i) => {
+        const row = document.createElement('div');
+        row.className = 'grid md:grid-cols-[120px_1fr] gap-4 items-start';
+        row.innerHTML = `
+          <div class="text-white/70 mt-1">${item.time}</div>
+          <div class="glass rounded-xl p-5">
+            <div class="flex items-start gap-3">
+              <span class="mt-1 h-2.5 w-2.5 rounded-full ${i % 3 === 0 ? 'bg-indigo-400' : i % 3 === 1 ? 'bg-emerald-400' : 'bg-pink-400'}"></span>
+              <div>
+                <div class="font-semibold">${item.title}</div>
+                <div class="text-white/70 mt-1">${item.note}</div>
+              </div>
+            </div>
+          </div>
+        `;
+        timelineEl.appendChild(row);
+      });
+    }
+    function setMode(mode) {
+      if (mode === 'weekday') {
+        weekdayBtn.classList.add('bg-white/20');
+        weekendBtn.classList.remove('bg-white/20');
+        renderTimeline(weekday);
+      } else {
+        weekendBtn.classList.add('bg-white/20');
+        weekdayBtn.classList.remove('bg-white/20');
+        renderTimeline(weekend);
+      }
+    }
+    weekdayBtn.addEventListener('click', () => setMode('weekday'));
+    weekendBtn.addEventListener('click', () => setMode('weekend'));
+    setMode('weekday');
+
+    // Interactive Solar System Canvas
+    (function() {
+      const canvas = document.getElementById('universe');
+      const ctx = canvas.getContext('2d');
+      const tooltip = document.getElementById('planetTooltip');
+
+      // UI controls
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const labelToggle = document.getElementById('labelToggle');
+      const zoomRange = document.getElementById('zoomRange');
+      const zoomVal = document.getElementById('zoomVal');
+      const speedRange = document.getElementById('speedRange');
+      const speedVal = document.getElementById('speedVal');
+
+      let w, h, dpr;
+      let t = 0;
+      let paused = false;
+      let zoom = 1;
+      let speed = 1;
+      let mouse = { x: 0, y: 0 };
+      let hoverPlanet = null;
+
+      const starCount = 800;
+      let stars = [];
+      let comets = [];
+
+      const planets = [
+        // name, radius, orbit radius, speed, base color, hasRings, tilt, moons
+        { name: 'Mercury', r: 2.2, R: 48,  s: 0.020, c: ['#b8b8b8','#7a7a7a'], rings: false, tilt: 0.03, moons: [] },
+        { name: 'Venus',   r: 4.8, R: 68,  s: 0.015, c: ['#e8c27b','#9f7b3d'], rings: false, tilt: 0.01, moons: [] },
+        { name: 'Earth',   r: 4.6, R: 88,  s: 0.012, c: ['#2e8fff','#1b4a9e'], rings: false, tilt: 0.41, moons: [ { r: 1.5, R: 8, s: 0.05 } ] },
+        { name: 'Mars',    r: 3.6, R: 110, s: 0.010, c: ['#ff6b4a','#9c3b2b'], rings: false, tilt: 0.44, moons: [ { r: 1.1, R: 6, s: 0.09 } ] },
+        { name: 'Jupiter', r: 9.5, R: 150, s: 0.008, c: ['#d2b48c','#8b6b4a'], rings: false, tilt: 0.05, moons: [ { r: 1.3, R: 14, s: 0.13 }, { r: 1.2, R: 18, s: 0.10 } ] },
+        { name: 'Saturn',  r: 8.5, R: 190, s: 0.006, c: ['#f1d08a','#a18652'], rings: true,  tilt: 0.47, moons: [ { r: 1.1, R: 12, s: 0.12 } ] },
+        { name: 'Uranus',  r: 6.4, R: 230, s: 0.004, c: ['#9be7ff','#4aa0c8'], rings: false, tilt: 1.70, moons: [] },
+        { name: 'Neptune', r: 6.1, R: 270, s: 0.003, c: ['#6aa6ff','#2a57a1'], rings: false, tilt: 0.49, moons: [] },
+      ];
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = canvas.clientWidth;
+        h = canvas.clientHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        // Recreate stars with new bounds
+        stars = Array.from({ length: starCount }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          z: Math.random(), // depth
+          o: Math.random() * 0.7 + 0.3
+        }));
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      // Parallax offset based on mouse
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      // UI interactions
+      playPauseBtn?.addEventListener('click', () => {
+        paused = !paused;
+        playPauseBtn.textContent = paused ? 'Play' : 'Pause';
+      });
+      labelToggle?.addEventListener('change', () => {});
+      zoomRange?.addEventListener('input', (e) => {
+        const val = Number(e.target.value) / 100;
+        zoom = val;
+        zoomVal.textContent = Math.round(val * 100) + '%';
+      });
+      speedRange?.addEventListener('input', (e) => {
+        const val = Number(e.target.value) / 100;
+        speed = val;
+        speedVal.textContent = val.toFixed(2).replace(/\.00$/, '') + 'x';
+      });
+
+      function drawStars() {
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
+          const parallaxX = (mouse.x / w - 0.5) * (1 - s.z) * 14;
+          const parallaxY = (mouse.y / h - 0.5) * (1 - s.z) * 14;
+          ctx.fillStyle = `rgba(255,255,255,${s.o * (0.4 + 0.6 * Math.sin((t*0.5) + i))})`;
+          const size = 0.8 + (1 - s.z) * 1.6;
+          ctx.fillRect(s.x + parallaxX, s.y + parallaxY, size, size);
+        }
+      }
+
+      function glowCircle(x, y, r, inner, outer) {
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0, inner);
+        g.addColorStop(1, outer);
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function drawSun(cx, cy) {
+        glowCircle(cx, cy, 40 * zoom, 'rgba(255,230,120,1)', 'rgba(255,170,0,0.65)');
+        glowCircle(cx, cy, 90 * zoom, 'rgba(255,200,0,0.25)', 'rgba(255,120,0,0)');
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        for (let i = 0; i < 10; i++) {
+          const angle = (t * 0.15 * speed) + (i * Math.PI / 5);
+          const x = cx + Math.cos(angle) * (24 * zoom);
+          const y = cy + Math.sin(angle) * (24 * zoom);
+          glowCircle(x, y, 18 * zoom, 'rgba(255,210,90,0.25)', 'rgba(255,120,0,0)');
+        }
+        ctx.restore();
+      }
+
+      function drawOrbits(cx, cy) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+        ctx.lineWidth = 1;
+        planets.forEach(p => {
+          ctx.beginPath();
+          ctx.ellipse(cx, cy, p.R * zoom, p.R * (0.98 + Math.sin(p.tilt) * 0.02) * zoom, 0, 0, Math.PI * 2);
+          ctx.stroke();
+        });
+      }
+
+      function drawPlanet(p, cx, cy, angle) {
+        const R = p.R * zoom;
+        const x = cx + Math.cos(angle) * R;
+        const y = cy + Math.sin(angle) * R * (0.98 + Math.sin(p.tilt) * 0.02);
+
+        // day-night shading
+        const lightX = cx, lightY = cy;
+        const dx = x - lightX; const dy = y - lightY;
+        const grad = ctx.createRadialGradient(x - dx * 0.08, y - dy * 0.08, 0, x, y, p.r * 1.4 * zoom);
+        grad.addColorStop(0, p.c[0]);
+        grad.addColorStop(1, p.c[1]);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(x, y, p.r * zoom, 0, Math.PI * 2);
+        ctx.fill();
+
+        // atmosphere rim
+        ctx.strokeStyle = 'rgba(255,255,255,0.16)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(x, y, p.r * 0.92 * zoom, Math.PI * 0.2, Math.PI * 1.1);
+        ctx.stroke();
+
+        // subtle texture bands for gas giants
+        if (p.name === 'Jupiter' || p.name === 'Saturn' || p.name === 'Uranus' || p.name === 'Neptune') {
+          ctx.save();
+          ctx.globalAlpha = 0.25;
+          for (let i = -2; i <= 2; i++) {
+            ctx.beginPath();
+            ctx.ellipse(x, y + i * (p.r * 0.25 * zoom), p.r * 0.9 * zoom, p.r * 0.28 * zoom, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+
+        // rings
+        if (p.rings) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(-0.6);
+          ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+          for (let i = 0; i < 4; i++) {
+            ctx.lineWidth = 2 - i * 0.35;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, p.r * (1.8 + i*0.25) * zoom, p.r * (0.75 + i*0.12) * zoom, 0, 0, Math.PI*2);
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+
+        // moons
+        p.moons?.forEach((m, idx) => {
+          const ma = angle * (1 + m.s * 3) + idx;
+          const mx = x + Math.cos(ma) * m.R * zoom;
+          const my = y + Math.sin(ma) * m.R * zoom * 0.96;
+          ctx.fillStyle = 'rgba(255,255,255,0.9)';
+          ctx.beginPath();
+          ctx.arc(mx, my, m.r * zoom, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // optional label near planet
+        if (labelToggle?.checked) {
+          ctx.fillStyle = 'rgba(255,255,255,0.85)';
+          ctx.font = `${12 * zoom}px Inter, system-ui`;
+          ctx.textAlign = 'center';
+          ctx.fillText(p.name, x, y - (p.r + 10) * zoom);
+        }
+
+        return { x, y };
+      }
+
+      function drawComets() {
+        // randomly spawn
+        if (Math.random() < 0.01 && comets.length < 3) {
+          const fromLeft = Math.random() < 0.5;
+          comets.push({
+            x: fromLeft ? -50 : w + 50,
+            y: Math.random() * h * 0.6 + h * 0.2,
+            vx: (fromLeft ? 1 : -1) * (2 + Math.random() * 1.5),
+            vy: -0.5 + Math.random(),
+            life: 0
+          });
+        }
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        comets.forEach(c => {
+          c.x += c.vx * (0.6 + speed*0.4);
+          c.y += c.vy;
+          c.life += 1;
+          // tail
+          const tail = 12 + Math.min(60, c.life * 1.2);
+          const grad = ctx.createLinearGradient(c.x, c.y, c.x - c.vx * tail, c.y - c.vy * tail);
+          grad.addColorStop(0, 'rgba(255,255,255,0.9)');
+          grad.addColorStop(1, 'rgba(0,153,255,0)');
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(c.x, c.y);
+          ctx.lineTo(c.x - c.vx * tail, c.y - c.vy * tail);
+          ctx.stroke();
+        });
+        // keep on screen
+        comets = comets.filter(c => c.x > -100 && c.x < w + 100 && c.y > -100 && c.y < h + 100);
+        ctx.restore();
+      }
+
+      function animate() {
+        if (!paused) t += 1 * speed;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Background space gradient
+        const g = ctx.createLinearGradient(0, 0, 0, h);
+        g.addColorStop(0, '#050814');
+        g.addColorStop(1, '#0a0f1e');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+
+        drawStars();
+
+        const cx = w / 2 + (mouse.x / w - 0.5) * 20;
+        const cy = h / 2 + (mouse.y / h - 0.5) * 10;
+
+        drawOrbits(cx, cy);
+        drawSun(cx, cy);
+
+        hoverPlanet = null;
+        let minDist = Infinity;
+        const mx = mouse.x, my = mouse.y;
+
+        planets.forEach((p, idx) => {
+          const angle = t * p.s * 0.05 + idx;
+          const pos = drawPlanet(p, cx, cy, angle);
+          // Hover detection
+          const dx = pos.x - mx;
+          const dy = pos.y - my;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          const hit = dist < (p.r * zoom + 8);
+          if (hit && dist < minDist) {
+            minDist = dist;
+            hoverPlanet = { name: p.name, x: pos.x, y: pos.y };
+          }
+        });
+
+        drawComets();
+
+        // Tooltip follow
+        if (hoverPlanet) {
+          tooltip.textContent = hoverPlanet.name;
+          tooltip.style.left = hoverPlanet.x + 'px';
+          tooltip.style.top = hoverPlanet.y + 'px';
+          tooltip.classList.remove('hidden');
+        } else {
+          tooltip.classList.add('hidden');
+        }
+
+
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96fb36e9e1ad4ea6',t:'MTc1NTI4NzM1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+
+
+
+
+
