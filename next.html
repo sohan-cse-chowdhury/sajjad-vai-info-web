@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sajjad Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Canvas background */
+    #universe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    }
+
+    /* Chatbot */
+    #chatbot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 320px;
+      max-width: 90vw; /* mobile responsive */
+      height: 400px;
+      max-height: 70vh;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      z-index: 50;
+    }
+
+    #chatHeader {
+      background: #4f46e5;
+      color: white;
+      padding: 0.75rem;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    #chatMessages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    #chatInputContainer {
+      display: flex;
+      padding: 0.5rem;
+      border-top: 1px solid #ddd;
+    }
+
+    #chatInput {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+
+    #chatbotButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: #4f46e5;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 50;
+    }
+
+    /* Section fix */
+    section {
+      min-height: 100vh;
+      padding: 4rem 1rem;
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      #mobile-menu {
+        display: block;
+      }
+      #desktop-menu {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body class="text-gray-900">
+
+  <!-- Background Canvas -->
+  <canvas id="universe"></canvas>
+
+  <!-- Navbar -->
+  <header class="fixed w-full top-0 left-0 bg-white/80 backdrop-blur-md shadow z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+      <h1 class="text-2xl font-bold text-indigo-600">Sajjad</h1>
+      <nav id="desktop-menu" class="hidden md:flex gap-6">
+        <a href="#about" class="hover:text-indigo-600">About</a>
+        <a href="#socials" class="hover:text-indigo-600">Socials</a>
+        <a href="#activities" class="hover:text-indigo-600">Activities</a>
+        <a href="#memories" class="hover:text-indigo-600">Memories</a>
+        <a href="#contact" class="hover:text-indigo-600">Contact</a>
+      </nav>
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu" class="md:hidden text-2xl">☰</button>
+    </div>
+    <div id="mobile-nav" class="hidden flex-col bg-white shadow px-4 py-2 space-y-2">
+      <a href="#about" class="hover:text-indigo-600">About</a>
+      <a href="#socials" class="hover:text-indigo-600">Socials</a>
+      <a href="#activities" class="hover:text-indigo-600">Activities</a>
+      <a href="#memories" class="hover:text-indigo-600">Memories</a>
+      <a href="#contact" class="hover:text-indigo-600">Contact</a>
+    </div>
+  </header>
+
+  <!-- Sections -->
+  <main class="pt-20">
+    <section id="about" class="bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4">About Me</h2>
+        <p>Hello! I'm Sajjad, a passionate web developer.</p>
+      </div>
+    </section>
+
+    <section id="socials" class="bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4">Socials</h2>
+        <p>Links to my socials go here.</p>
+      </div>
+    </section>
+
+    <section id="activities" class="bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4">Daily Activities</h2>
+        <p>Some description here...</p>
+      </div>
+    </section>
+
+    <section id="memories" class="bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4">Memories</h2>
+        <p>Gallery and memories content...</p>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4">Contact</h2>
+        <p>You can contact me here...</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-4 text-center">
+    © 2025 Sajjad. All rights reserved.
+  </footer>
+
+  <!-- Chatbot -->
+  <div id="chatbot">
+    <div id="chatHeader">
+      <span>SajjadAI</span>
+      <button onclick="toggleChatbot()">✖</button>
+    </div>
+    <div id="chatMessages"></div>
+    <div id="chatInputContainer">
+      <input id="chatInput" type="text" placeholder="Type a message..."/>
+      <button onclick="sendMessage()" class="ml-2 bg-indigo-600 text-white px-4 rounded">Send</button>
+    </div>
+  </div>
+  <button id="chatbotButton" onclick="toggleChatbot()">💬</button>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    document.getElementById("mobile-menu").addEventListener("click", () => {
+      document.getElementById("mobile-nav").classList.toggle("hidden");
+    });
+
+    // Chatbot
+    function toggleChatbot() {
+      const bot = document.getElementById("chatbot");
+      bot.style.display = bot.style.display === "flex" ? "none" : "flex";
+    }
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const msg = input.value.trim();
+      if(!msg) return;
+      const chat = document.getElementById("chatMessages");
+      chat.innerHTML += `<div><b>You:</b> ${msg}</div>`;
+      setTimeout(()=> {
+        chat.innerHTML += `<div><b>SajjadAI:</b> Hello! I received: ${msg}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+      },500);
+      input.value = "";
+    }
+
+    // Canvas animation placeholder
+    const canvas = document.getElementById("universe");
+    const ctx = canvas.getContext("2d");
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    function animate() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle="rgba(255,255,255,0.3)";
+      ctx.beginPath();
+      ctx.arc(canvas.width/2, canvas.height/2, 50, 0, Math.PI*2);
+      ctx.fill();
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
